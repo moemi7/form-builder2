@@ -34,7 +34,7 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
               >
                 <img
                   src={logo}
-                  alt="Form Builder"
+                  alt="Configurator"
                   style={
                     isMobile
                       ? { marginTop: "7px", display: "inline-block" }
@@ -42,7 +42,7 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
                   }
                   className={isMobile ? "p-l-20 p-r-15" : "p-r-20"}
                 />
-                Form Builder
+                Configurator
               </a>
             </div>
           </div>

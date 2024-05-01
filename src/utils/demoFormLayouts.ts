@@ -5,10 +5,10 @@ const currentDateTime = moment().unix()*1000;
 
 const DemoFormLayouts: any = [
   {
-    id: generateID(),
-    formName: "Regular POD Form",
+    id: 'osama',                            //id: generateID(),
+    formName: "Standaard form",
     createdAt: currentDateTime,
-    creator: "Test User",
+    creator: "Oussama",
     formLayoutComponents: [
       {
         container: {
@@ -85,7 +85,7 @@ const DemoFormLayouts: any = [
   },
   {
     id: generateID(),
-    formName: "Legal Document Form",
+    formName: "legale Document Form",
     createdAt: currentDateTime,
     creator: "Test User",
     formLayoutComponents: [

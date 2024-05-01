@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import RenderItem from "./RenderItem";
-import { FormLayoutComponentsType } from "../../../../types/FormTemplateTypes";
+import { TemplateType, FormLayoutComponentsType } from "../../../../types/FormTemplateTypes";
+import { Paper } from "@mui/material";
 
 const previewWindowStyle = {
   backgroundColor: 'white', 
@@ -13,16 +14,20 @@ const previewWindowStyle = {
   marginRight: 'auto'
 }
 
-interface StepperFormPreviewProps{
+interface PreviewdesktopProps{
+  template: TemplateType
   formLayoutComponents: FormLayoutComponentsType[];
   screenType: string
 }
 
-const StepperFormPreview: FC<StepperFormPreviewProps> = (props)=> {
+
+
+const Previewdesktop: FC<PreviewdesktopProps> = (props)=> {
+  
   const [componentIndex, setComponentIndex] = useState(0);
   const { formLayoutComponents, screenType } = props;
-  console.log(formLayoutComponents)
-  console.log(screenType)
+  console.log(formLayoutComponents);
+  console.log(screenType);
 
   const component = formLayoutComponents[componentIndex];
 
@@ -31,11 +36,21 @@ const StepperFormPreview: FC<StepperFormPreviewProps> = (props)=> {
   }
 
   const isMobile = screenType === 'mobile';
+  console.log(formLayoutComponents.length);
 
   return (
+    <Paper>
+
     <>
       {formLayoutComponents.length > 0 ? (
+
         <>
+         <div style={{ minWidth: "30vw", backgroundColor: "#f8f9fa", height: "100vh" }}>
+             <div className="container">
+               <div className="p-20">
+                <div className="d-flex align-items-center">
+                   <h4>Preview</h4>
+                </div>
           <div className="m-t-30 p-30">
             <div style={{...previewWindowStyle as any,width: isMobile ? '400px':'initial'}} className="p-20">
               <div className="main-form">
@@ -100,6 +115,9 @@ const StepperFormPreview: FC<StepperFormPreviewProps> = (props)=> {
               </div>
             </div>
           </div>
+          </div>
+            </div>
+          </div>
         </>
       ) : (
         <>
@@ -108,8 +126,10 @@ const StepperFormPreview: FC<StepperFormPreviewProps> = (props)=> {
           </div>
         </>
       )}
+      
     </>
+    </Paper>
   );
 }
 
-export default StepperFormPreview;
+export default Previewdesktop;

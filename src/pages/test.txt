@@ -1,0 +1,39 @@
+import React, { FunctionComponent } from "react";
+import Test from "../components/FormBuilder/subcomponents/form-export";
+import useFormBuilder from "../components/FormBuilder/hooks/useFormBuilder";
+
+interface FormBuilderProps {
+    template: TemplateType
+  
+}
+
+const FormBuilder: FunctionComponent<FormBuilderProps> = (props) => {
+
+    const {
+      handleItemAdded,
+      saveForm,
+      deleteContainer,
+      deleteControl,
+      editContainerProperties,
+      editControlProperties,
+      moveControl,
+      moveControlFromSide,
+      publishForm,
+      selectControl,
+      selectedTemplate,
+      formLayoutComponents,
+      selectedControl,
+    } = useFormBuilder({ template: props.template });
+ 
+const Test: React.FC = () => {
+  return (
+    <>
+      <Test  screenType="mobile" formLayoutComponents={formLayoutComponents} />
+
+
+    </>
+    
+  );
+}
+ 
+export default Test

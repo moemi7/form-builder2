@@ -105,7 +105,7 @@ export const deleteTemplate = createAsyncThunk(
         thunkAPI.dispatch(closeCircularProgress());
         saveToLocalStorage("templates",JSON.stringify(allTemplates));
         resolve(deleteIndex);
-      }, 600);
+      }, 600); 
     });
   }
 );
@@ -176,3 +176,94 @@ const slice = createSlice({
 export const { setSelectedTemplateNull } = slice.actions;
 
 export default slice.reducer;
+
+// = logic om template te veranderen in next.js form
+/*
+Input= template type
+
+export interface TemplateType{
+  formName: string,
+  id: string,
+  createdAt: number,
+  updatedAt: number,
+  lastPublishedAt: number,
+  publishStatus: string,
+  formLayoutComponents: FormLayoutComponentsType[],
+  publishHistory: FormLayoutHistoryType[],
+  creator: string
+}
+
+export interface FormLayoutComponentsType{
+  container:FormLayoutComponentContainerType,
+  children: FormLayoutComponentChildrenType[]
+}
+
+export interface FormLayoutHistoryType{
+  lastPublishedAt: number,
+  formLayoutComponents: FormLayoutComponentsType[]
+}
+
+interface FormLayoutComponentContainerType{
+  controlName: string,
+  displayText: string,
+  itemType: string,
+  icon: string,
+  heading: string,
+  subHeading: string,
+  id: string,
+  desktopWidth?: number
+}
+
+interface FormLayoutComponentChildrenType{
+  controlName: string,
+  displayText: string,
+  description: string,
+  labelName: string,
+  itemType: string,
+  icon: string,
+  required: boolean,
+  items?: FormLayoutCoponentChildrenItemsType[],
+  category: string,
+  index?: number,
+  id: string,
+  containerId: string,
+  placeholder?: string,
+  rows?: number,
+  dataType?: string
+  position?: number
+}
+
+interface FormLayoutCoponentChildrenItemsType{
+  id: string
+  value: string
+  label: string
+}
+
+
+Output =
+
+    <>
+      <div className="d-flex mt-5 flex-column align-items-center justify-content-center">
+        <h3>Eerste template</h3>
+        <div className="form-templates row mt-3">
+          <FormLayoutComponent
+            createdFormLayout={false}
+            setOpenDialog={setOpenDialog}
+          />
+          {templates.map((template) => (
+            <FormLayoutComponent
+              key={template.id}
+              template={template}
+              createdFormLayout={true}
+            />
+          ))}
+        </div>
+      </div>
+      <NewFormDialogComponent
+        openDialog={openDialog}
+        setOpenDialog={setOpenDialog}
+      />
+    </>
+
+
+*/

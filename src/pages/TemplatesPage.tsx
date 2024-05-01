@@ -4,10 +4,14 @@ import { getAllTemplates } from "../redux/entities/formBuilderEntity";
 import { useNavigate } from "react-router-dom";
 import NewFormDialogComponent from "../components/FormTemplates/NewFormDialogComponent";
 import FormLayoutComponent from "../components/FormTemplates/FormLayoutComponent";
+import Button from "@mui/material/Button";
+import {Link} from "react-router-dom";
+
 
 interface TemplatesPageProps {}
 
 const TemplatesPage: FunctionComponent<TemplatesPageProps> = () => {
+  
   const templates = useAppSelector(
     (state) => state.entities.formBuilder.allTemplates
   );
@@ -36,7 +40,7 @@ const TemplatesPage: FunctionComponent<TemplatesPageProps> = () => {
   return (
     <>
       <div className="d-flex mt-5 flex-column align-items-center justify-content-center">
-        <h3>All Form Templates</h3>
+        <h3>Alle Templates</h3>
         <div className="form-templates row mt-3">
           <FormLayoutComponent
             createdFormLayout={false}
@@ -50,7 +54,12 @@ const TemplatesPage: FunctionComponent<TemplatesPageProps> = () => {
             />
           ))}
         </div>
+        <Button component={Link} to="/showcase" variant="contained">
+          Bekijk je configurator
+        </Button>
+
       </div>
+
       <NewFormDialogComponent
         openDialog={openDialog}
         setOpenDialog={setOpenDialog}
