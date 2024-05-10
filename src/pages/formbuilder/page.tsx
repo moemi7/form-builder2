@@ -56,9 +56,8 @@ const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = () => {
 
   return (
     <>
-      {typeof window !== "undefined" && template ? (
+      
         <FormBuilder template={template ? template : defaultForm} />
-      ) : null}
     </>
   );
 };
