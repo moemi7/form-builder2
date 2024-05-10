@@ -12,7 +12,7 @@ import StepperFormPreview from "../../components/FormBuilder/subcomponents/form-
 import ConfiguratorPreview from "../../components/FormBuilder/subcomponents/form-preview/ConfiguratorPreview";
 import FormLayoutComponent from "../../components/FormTemplates/FormLayoutComponent";
 import { TemplateType, FormLayoutComponentsType } from "../../types/FormTemplateTypes";
-import TemplatesPage from "./TemplatesPage";
+import TemplatesPage from "../TemplatesPage/page";
 import { template } from "lodash";
 import { type } from "@testing-library/user-event/dist/type";
 import FormPreview from "../../components/FormBuilder/subcomponents/FormPreview";
