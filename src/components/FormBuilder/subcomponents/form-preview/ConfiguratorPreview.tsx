@@ -53,20 +53,25 @@ const StepperFormPreview: FC<StepperFormPreviewProps> = (props)=> {
 
   useScript('https://smtpjs.com/v3/smtp.js');
 
-  function sendemail(){
-    Email.send({
-      Host : "smtp.elasticemail.com",
-      Username : "username",
-      Password : "password",
-      To : 'them@website.com',
-      From : "you@isp.com",
-      Subject : "This is the subject",
-      Body : "And this is the body"
-  }).then(
-    message => alert(message)
-  );
+
   
-  }
+  function sendemail() {
+    const Email = (window as any).Email; // Type assertion to any
+    if (Email && Email.send) {
+      Email.send({
+        Host: 'smtp.elasticemail.com',
+        Username: 'username',
+        Password: 'password',
+        To: 'them@website.com',
+        From: 'you@isp.com',
+        Subject: 'This is the subject',
+        Body: 'And this is the body',
+      }).then((message) => alert(message));
+    } else {
+      console.error('Email function is not available.');
+    }}
+  
+  
 
 
   return (
