@@ -1,0 +1,49 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Test {
+  id       Int    @id @default(autoincrement())
+  formName String
+}
+
+model TemplateType {
+  id                   Int                   @id @default(autoincrement())
+  formName             String
+  formID               String
+  createdAt            DateTime              @default(now())
+  updatedAt            DateTime              @updatedAt
+  lastPublishedAt      DateTime?
+  publishStatus        String
+  creator              String
+  formLayoutComponents FormLayoutComponent[]
+}
+
+model FormLayoutComponent {
+  id             String       @id @default(cuid())
+  controlName    String?
+  displayText    String?
+  placeholder    String?
+  description    String?
+  labelName      String?
+  
+  itemType       String?
+  dataType       String?
+  icon           String?
+  required       Boolean?
+  category       String?
+  containerId    String?
+  index          Int?
+  heading        String?
+  subHeading     String?
+  desktopWidth   Int?
+  templateTypeId Int
+  templateType   TemplateType @relation(fields: [templateTypeId], references: [id])
+
+  @@index([templateTypeId], map: "FormLayoutComponent_templateTypeId_fkey")
+}

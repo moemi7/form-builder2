@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model TemplateType {
+  id                   Int                        @id @default(autoincrement())
+  formName             String
+  createdAt            DateTime                   @default(now())
+  updatedAt            DateTime                   @updatedAt
+  lastPublishedAt      DateTime?
+  publishStatus        String
+  creator              String
+  formLayoutComponents FormLayoutComponentsType[]
+}
+
+model FormLayoutComponentsType {
+  id          Int                               @id @default(autoincrement())
+  containerId Int
+  children    FormLayoutComponentChildrenType[]
+  template    FormLayoutComponentContainerType  @relation(fields: [containerId], references: [id], map: "template_relation")
+  template    TemplateType                      @relation(fields: [containerId], references: [id], map: "template_relation")
+
+  @@index([containerId], map: "container_relation")
+}
+
+model FormLayoutComponentContainerType {
+  id                              Int                               @id @default(autoincrement())
+  controlName                     String
+  displayText                     String
+  itemType                        String
+  icon                            String
+  heading                         String
+  subHeading                      String
+  desktopWidth                    Int?
+  FormLayoutComponentChildrenType FormLayoutComponentChildrenType[]
+  formLayoutComponents            FormLayoutComponentsType[]
+}
+
+model FormLayoutComponentChildrenType {
+  id                         Int                                   @id @default(autoincrement())
+  controlName                String
+  displayText                String
+  description                String
+  labelName                  String
+  itemType                   String
+  icon                       String
+  required                   Boolean
+  category                   String
+  index                      Int
+  placeholder                String?
+  rows                       Int?
+  dataType                   String?
+  position                   Int?
+  containerId                Int
+  formLayoutComponentsTypeId Int?
+  container                  FormLayoutComponentContainerType      @relation(fields: [containerId], references: [id])
+  FormLayoutComponentsType   FormLayoutComponentsType?             @relation(fields: [formLayoutComponentsTypeId], references: [id])
+  items                      FormLayoutCoponentChildrenItemsType[]
+
+  @@index([containerId], map: "FormLayoutComponentChildrenType_containerId_fkey")
+  @@index([formLayoutComponentsTypeId], map: "FormLayoutComponentChildrenType_formLayoutComponentsTypeId_fkey")
+}
+
+model FormLayoutCoponentChildrenItemsType {
+  id               Int                             @id @default(autoincrement())
+  value            String
+  label            String
+  componentChildId Int
+  componentChild   FormLayoutComponentChildrenType @relation(fields: [componentChildId], references: [id])
+
+  @@index([componentChildId], map: "FormLayoutCoponentChildrenItemsType_componentChildId_fkey")
+}

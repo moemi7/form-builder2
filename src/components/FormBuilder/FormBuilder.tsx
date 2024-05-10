@@ -22,9 +22,9 @@ import { useNavigate } from "react-router-dom";
 
 let isMobile: boolean;
 if (process.env.NODE_ENV === "localhost") {
-  isMobile = window.innerWidth < 1024;
+  isMobile = window.innerWidth < 200;
 } else {
-  isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
+  isMobile = libIsMobile || libIsTablet || window.innerWidth < 200;
 }
 
 interface FormBuilderProps {
@@ -98,11 +98,11 @@ const FormBuilder: FunctionComponent<FormBuilderProps> = (props) => {
                               }}
                               className="mx-2"
                             >
-                              Cancel
+                              Cancellen
                             </Button>
                             <div className="border-right"></div>
                             <Button onClick={saveForm} className="mx-2">
-                              Save
+                              opslaan
                             </Button>
                             <Button
                               className="mx-2"
@@ -110,7 +110,7 @@ const FormBuilder: FunctionComponent<FormBuilderProps> = (props) => {
                               onClick={() => openPreviewDrawer()}
                               endIcon={<RemoveRedEye />}
                             >
-                              Preview
+                              bekijk
                             </Button>
                             <Button
                               onClick={publishForm}
@@ -120,7 +120,7 @@ const FormBuilder: FunctionComponent<FormBuilderProps> = (props) => {
                               disableElevation
                               variant="contained"
                             >
-                              Publish
+                              publiceer
                             </Button>
                           </div>
                         </div>

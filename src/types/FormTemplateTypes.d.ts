@@ -1,6 +1,7 @@
 export interface TemplateType{
   formName: string,
   id: string,
+  formID:string,
   createdAt: number,
   updatedAt: number,
   lastPublishedAt: number,

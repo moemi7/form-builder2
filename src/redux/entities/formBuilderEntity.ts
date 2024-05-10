@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TemplateType } from "../../types/FormTemplateTypes";
-import { getFromLocalStorage, saveToLocalStorage } from "../common";
+import { getFromLocalStorage, saveToLocalStorage, saveToDatabase, test } from "../common";
 import DemoFormLayouts from "../../utils/demoFormLayouts";
 import {
   closeCircularProgress,
@@ -12,6 +12,7 @@ import _ from "lodash";
 
 interface AddTemplateType {
   formName: string;
+  formID: string;
 }
 
 // Logic to Get All Templates
@@ -22,10 +23,16 @@ export const getAllTemplates = createAsyncThunk(
     thunkAPI.dispatch(openCircularProgress());
     return await new Promise<TemplateType[]>((resolve, reject) => {
       let outputInStorage = JSON.parse(getFromLocalStorage("templates"));
+      saveToDatabase("templates", JSON.stringify(outputInStorage));
       // Check if its null;
-      if (outputInStorage === null) {
+      if (outputInStorage === 0) {          //
         outputInStorage = DemoFormLayouts;
-        saveToLocalStorage("templates", JSON.stringify(outputInStorage));
+        try{
+        saveToLocalStorage("templates", JSON.stringify(outputInStorage));}
+        catch(error){
+            console.log('not working ' + error);
+        }
+
       }
       setTimeout(() => {
         // Close the Circular Progress
@@ -68,7 +75,8 @@ export const addTemplate = createAsyncThunk(
       );
       // Create new Template
       const template: TemplateType = {
-        id: generateID(),
+        id: data.formID,
+        formID: data.formID,
         formName: data.formName,
         createdAt: currentDateTime,
         creator: "Test User",
@@ -81,6 +89,8 @@ export const addTemplate = createAsyncThunk(
       allTemplates.push(template);
       setTimeout(() => {
         saveToLocalStorage("templates",JSON.stringify(allTemplates));
+        console.log(template);
+        saveToDatabase("templates",JSON.stringify(template));
         resolve(template);
       }, 1000);
     });
@@ -127,6 +137,9 @@ export const saveTemplate = createAsyncThunk(
         // Close the Circular Progress
         thunkAPI.dispatch(closeCircularProgress());
         saveToLocalStorage("templates",JSON.stringify(allTemplates));
+        saveToDatabase("templates",JSON.stringify(allTemplates[templateIndex]));
+        //test();
+
         resolve(data);
       }, 1000);
     })

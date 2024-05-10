@@ -1,0 +1,92 @@
+// schema.prisma
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+
+model Test {
+    id                   Int                        @id @default(autoincrement())
+    formName             String
+
+}
+model TemplateType {
+  id                   Int                        @id @default(autoincrement())
+  formName             String
+  formID               String
+  createdAt            DateTime                   @default(now())
+  updatedAt            DateTime                   @updatedAt
+  lastPublishedAt      DateTime?
+  publishStatus        String
+  creator              String
+  formLayoutComponents FormLayoutComponent[]
+}
+
+model FormLayoutComponent {
+  id            String   @id @default(cuid())
+  controlName   String
+  displayText   String
+  itemType      String
+  icon          String
+  heading       String
+  subHeading    String
+  desktopWidth  Int?
+  templateType  TemplateType @relation(fields: [templateTypeId], references: [id])
+  templateTypeId String
+}
+
+model FormLayoutComponentsType {
+  id          Int                               @id @default(autoincrement())
+  containerId Int
+  template    TemplateType                      @relation(fields: [containerId], references: [id], map: "template_relation")
+  container   FormLayoutComponentContainerType  @relation(fields: [containerId], references: [id], map: "container_relation")
+  children    FormLayoutComponentChildrenType[]
+}
+
+model FormLayoutComponentContainerType {
+  id                              Int                               @id @default(autoincrement())
+  controlName                     String
+  displayText                     String
+  itemType                        String
+  icon                            String
+  heading                         String
+  subHeading                      String
+  desktopWidth                    Int?
+  components                      FormLayoutComponentsType[]
+  FormLayoutComponentChildrenType FormLayoutComponentChildrenType[]
+}
+
+model FormLayoutComponentChildrenType {
+  id                         Int                                   @id @default(autoincrement())
+  controlName                String
+  displayText                String
+  description                String
+  labelName                  String
+  itemType                   String
+  icon                       String
+  required                   Boolean
+  category                   String
+  index                      Int
+  placeholder                String?
+  rows                       Int?
+  dataType                   String?
+  position                   Int?
+  containerId                Int
+  container                  FormLayoutComponentContainerType      @relation(fields: [containerId], references: [id])
+  items                      FormLayoutCoponentChildrenItemsType[]
+  FormLayoutComponentsType   FormLayoutComponentsType?             @relation(fields: [formLayoutComponentsTypeId], references: [id])
+  formLayoutComponentsTypeId Int?
+}
+
+model FormLayoutCoponentChildrenItemsType {
+  id               Int                             @id @default(autoincrement())
+  value            String
+  label            String
+  componentChild   FormLayoutComponentChildrenType @relation(fields: [componentChildId], references: [id])
+  componentChildId Int
+}

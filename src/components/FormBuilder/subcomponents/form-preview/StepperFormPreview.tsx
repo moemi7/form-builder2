@@ -46,7 +46,7 @@ const StepperFormPreview: FC<StepperFormPreviewProps> = (props)=> {
                   style={{ minWidth: "100%" }}
                 >
                   <div className="text-center border-bottom p-b-10">
-                    Step {componentIndex + 1}
+                    Stap {componentIndex + 1}
                   </div>
 
                   <div className="my-4">

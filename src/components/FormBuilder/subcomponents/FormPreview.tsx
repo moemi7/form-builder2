@@ -43,7 +43,7 @@ class FormPreview extends Component<FormPreviewProps, FormPreviewStates> {
                     style={{ marginRight: "10px", cursor: "pointer" }}
                     onClick={() => this.handleCloseClick()}
                   ></i>
-                  <h4>Preview</h4>
+                  <h4>bekijk</h4>
                 </div>
                 <StepperFormPreview screenType={this.state.screenType} formLayoutComponents={formLayoutComponents} />
               </div>

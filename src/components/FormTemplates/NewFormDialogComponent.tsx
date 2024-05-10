@@ -12,7 +12,8 @@ interface NewFormDialogComponentProps {
 }
 
 interface NewFormDataType{
-  formName: string
+  formName: string,
+  formID: string
 }
 
 const textboxStyle = {
@@ -29,8 +30,10 @@ const NewFormDialogComponent: FunctionComponent<NewFormDialogComponentProps> = (
   const [creatingForm, setCreatingForm] = useState<boolean>(false);
 
   const [newFormData, setNewFormData] = useState<NewFormDataType>({
-    formName: ''
+    formName: '',
+    formID: ''
   });
+  
 
   const handleInputChange:ChangeEventHandler<HTMLInputElement>  = (e)=>{
     const {name , value} = e.target;
@@ -41,6 +44,10 @@ const NewFormDialogComponent: FunctionComponent<NewFormDialogComponentProps> = (
     e.preventDefault();
     if(newFormData.formName === ''){
       showModalStrip("danger", "Form name cannot be empty", 5000);
+      return;
+    }
+    if(newFormData.formID === ''){
+      showModalStrip("danger", "Form ID cannot be empty", 5000);
       return;
     }
     setCreatingForm(true);
@@ -85,17 +92,24 @@ const NewFormDialogComponent: FunctionComponent<NewFormDialogComponentProps> = (
                 marginRight: "auto",
               }}
             >
-              <h4>Enter the following details:</h4>
+              <h4>Vul details in</h4>
               <form onSubmit={handleFormSubmit} style={{ minWidth: "100%" }}>
                 <div>
                   <TextField
-                    label="Form Name"
+                    label="Naam"
                     name="formName"
                     value={newFormData.formName}
                     onChange={handleInputChange}
                     style={textboxStyle}
                   />
                 </div>
+                <TextField
+                    label="ID"
+                    name="formID"
+                    value={newFormData.formID}
+                    onChange={handleInputChange}
+                    style={textboxStyle}
+                  />
                 <button
                   className="btn btn-light btn-shadow m-t-20 m-r-10"
                   type="submit"
@@ -111,13 +125,13 @@ const NewFormDialogComponent: FunctionComponent<NewFormDialogComponentProps> = (
                       Loading
                     </>
                   ) : (
-                    "Create Form"
+                    "Maak configurator"
                   )}
                 </button>
                 <input
                   type="button"
                   className="btn btn-light btn-shadow m-t-20 m-l-0"
-                  value="Cancel"
+                  value="Annuleren"
                   disabled={creatingForm}
                   onClick={() => props.setOpenDialog(false)}
                 />

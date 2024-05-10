@@ -29,12 +29,10 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
               <a
                 href="/"
                 className="logo vcenter"
-                data-src-dark="/img/img-logo.png"
-                style={{ fontFamily: "Cassannet", fontSize: "16px" }}
+                
               >
                 <img
-                  src={logo}
-                  alt="Configurator"
+                  src='./../assets/img-logo'
                   style={
                     isMobile
                       ? { marginTop: "7px", display: "inline-block" }
