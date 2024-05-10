@@ -4,11 +4,9 @@ import {
   isTablet as libIsTablet
 } from "react-device-detect";
 let isMobile:Boolean;
-if (process.env.NODE_ENV === "localhost") {
-  isMobile = window.innerWidth < 1024;
-} else {
-  isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
-};
+
+isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
+
 interface NavbarProps {
   window?: ()=>Window
 }
