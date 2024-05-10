@@ -44,6 +44,7 @@ const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = () => {
   const defaultForm = {
     id: "0",
     formName: "",
+    formID: "0",
     createdAt: 0,
     creator: "",
     formLayoutComponents: [],
