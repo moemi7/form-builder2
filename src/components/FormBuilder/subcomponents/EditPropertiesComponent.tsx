@@ -73,7 +73,7 @@ const EditPropertiesComponent: FC<EditPropertiesComponentProps> = (props)=> {
 
 
   const addItemInList = (item:FormLayoutCoponentChildrenItemsType)=>{
-    const newItems = _.cloneDeep((updatedItem as FormLayoutComponentChildrenType).items);
+    const newItems = _.cloneDeep((updatedItem as FormLayoutComponentChildrenType).items) || [];
     newItems.push(item);
     setUpdatedItem((prevState)=>({
       ...prevState, items: newItems
@@ -88,7 +88,7 @@ const EditPropertiesComponent: FC<EditPropertiesComponentProps> = (props)=> {
   }
 
   const editIteminList = (item: FormLayoutCoponentChildrenItemsType)=>{
-    const newItems: FormLayoutCoponentChildrenItemsType[] = _.cloneDeep((updatedItem as FormLayoutComponentChildrenType).items);
+    const newItems: FormLayoutCoponentChildrenItemsType[] = _.cloneDeep((updatedItem as FormLayoutComponentChildrenType).items) || [];
     const itemToBeReplaced = newItems.filter((i)=>i.id === item.id)[0];
     itemToBeReplaced.value = item.value;
     itemToBeReplaced.label = item.label;
