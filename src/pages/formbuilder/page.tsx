@@ -1,22 +1,30 @@
 import React, { FunctionComponent, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import useModalStrip from "../../global-hooks/useModalStrip";
+import FormBuilder from "../../components/FormBuilder/FormBuilder";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  getSingleTemplate,
+  setSelectedTemplateNull,
+} from "../../redux/entities/formBuilderEntity";
+import useModalStrip from "../../global-hooks/useModalStrip";
 
 interface FormBuilderPageProps {}
 
 const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = () => {
+  const template = useAppSelector(
+    (state) => state.entities.formBuilder.selectedTemplate
+  );
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { showModalStrip } = useModalStrip();
   const { formId } = useParams();
-  const template = useAppSelector((state) => state.entities.formBuilder.selectedTemplate);
 
   useEffect(() => {
-    const fetchTemplate = async () => {
+    (async () => {
       try {
-        const { getSingleTemplate, setSelectedTemplateNull } = await import("../../redux/entities/formBuilderEntity");
-        const template = await dispatch(getSingleTemplate(formId as string)).unwrap();
+        const template = await dispatch(
+          getSingleTemplate(formId as string)
+        ).unwrap();
         console.log(template);
         if (!template) {
           throw new Error("Not found");
@@ -25,9 +33,7 @@ const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = () => {
         showModalStrip("danger", "The form id is not correct", 5000);
         navigate("/");
       }
-    };
-
-    fetchTemplate();
+    })();
 
     return () => {
       // Setting template to null when unmounting.
@@ -48,14 +54,10 @@ const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = () => {
     updatedAt: 0,
   };
 
-  const FormBuilder = React.lazy(() => import("../../components/FormBuilder/FormBuilder"));
-
   return (
     <>
-      {template ? (
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <FormBuilder template={template ? template : defaultForm} />
-        </React.Suspense>
+      {typeof window !== "undefined" && template ? (
+        <FormBuilder template={template ? template : defaultForm} />
       ) : null}
     </>
   );
