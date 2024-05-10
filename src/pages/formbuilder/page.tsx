@@ -26,8 +26,8 @@ const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = () => {
           getSingleTemplate(formId as string)
         ).unwrap();
         console.log(template);
-        if(!template){
-          throw new Error('Not found');
+        if (!template) {
+          throw new Error("Not found");
         }
       } catch (ex) {
         showModalStrip("danger", "The form id is not correct", 5000);
@@ -56,7 +56,7 @@ const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = () => {
 
   return (
     <>
-      {template ? (
+      {typeof window !== "undefined" && template ? (
         <FormBuilder template={template ? template : defaultForm} />
       ) : null}
     </>
