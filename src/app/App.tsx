@@ -21,6 +21,11 @@ function App() {
     </>
   );
 
+ // <Provider store={store}>
+ // <BackdropCircularProgressComponent />
+ // <ModalStrip />
+ // <RouterProvider router={router} />
+//</Provider>
 }
 
 export default App;

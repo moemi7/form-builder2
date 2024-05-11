@@ -7,20 +7,22 @@ import {
 
 
 
-useEffect(() => {
-  let isMobile: boolean;
-  if (process.env.NODE_ENV === "development") {
-    isMobile = window.innerWidth < 1024;
-  } else {
-    isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
-  }
-}, []);
+
 
 interface NavbarProps {
   window?: ()=>Window
 }
  
 const Navbar: FunctionComponent<NavbarProps> = (props) => {
+
+  useEffect(() => {
+    let isMobile: boolean;
+    if (process.env.NODE_ENV === "development") {
+      isMobile = window.innerWidth < 1024;
+    } else {
+      isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
+    }
+  }, []);
 
   return (
     <>

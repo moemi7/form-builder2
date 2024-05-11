@@ -20,18 +20,7 @@ import { generateID } from "../../utils/common";
 import ControlDragComponent from "./subcomponents/ControlDragComponent";
 import { useNavigate } from "react-router-dom";
 
-useEffect(() => {
-  let isMobile: boolean;
-  if (process.env.NODE_ENV === "development") {
-    isMobile = window.innerWidth < 200;
-  } else {
-    isMobile = libIsMobile || libIsTablet || window.innerWidth < 200;
-  }
-}, []);
 
-
-let isMobile: boolean;
-isMobile = false;
 interface FormBuilderProps {
   template: TemplateType
 }
@@ -49,6 +38,21 @@ const useStyles = makeStyles()(() => ({
 
 
 const FormBuilder: FunctionComponent<FormBuilderProps> = (props) => {
+
+  
+
+  useEffect(() => {
+    let isMobile: boolean;
+    if (process.env.NODE_ENV === "development") {
+      isMobile = window.innerWidth < 200;
+    } else {
+      isMobile = libIsMobile || libIsTablet || window.innerWidth < 200;
+    }
+  }, []);
+  
+  
+  let isMobile: boolean;
+  isMobile = false;
 
   const {
     handleItemAdded,
