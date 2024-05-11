@@ -4,13 +4,14 @@ import {
   isTablet as libIsTablet
 } from "react-device-detect";
 let isMobile:Boolean;
-
-isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
-
+if (process.env.NODE_ENV === "development") {
+  isMobile = window.innerWidth < 1024;
+} else {
+  isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
+}
 interface NavbarProps {
   window?: ()=>Window
 }
-import logo from './../assets/img-logo.png';
  
 const Navbar: FunctionComponent<NavbarProps> = (props) => {
 
@@ -29,15 +30,6 @@ const Navbar: FunctionComponent<NavbarProps> = (props) => {
                 className="logo vcenter"
                 
               >
-                <img
-                  src='./../assets/img-logo'
-                  style={
-                    isMobile
-                      ? { marginTop: "7px", display: "inline-block" }
-                      : { display: "inline-block" }
-                  }
-                  className={isMobile ? "p-l-20 p-r-15" : "p-r-20"}
-                />
                 Configurator
               </a>
             </div>
