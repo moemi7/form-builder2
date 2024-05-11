@@ -20,12 +20,15 @@ import { generateID } from "../../utils/common";
 import ControlDragComponent from "./subcomponents/ControlDragComponent";
 import { useNavigate } from "react-router-dom";
 
-let isMobile: boolean;
-if (process.env.NODE_ENV === "development") {
-  isMobile = window.innerWidth < 200;
-} else {
-  isMobile = libIsMobile || libIsTablet || window.innerWidth < 200;
-}
+useEffect(() => {
+  let isMobile: boolean;
+  if (process.env.NODE_ENV === "development") {
+    isMobile = window.innerWidth < 200;
+  } else {
+    isMobile = libIsMobile || libIsTablet || window.innerWidth < 200;
+  }
+}, []);
+
 
 interface FormBuilderProps {
   template: TemplateType

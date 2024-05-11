@@ -1,14 +1,21 @@
-import React, { FunctionComponent } from "react";
+
+import React,  { FunctionComponent, useEffect } from "react";
 import {
   isMobile as libIsMobile,
   isTablet as libIsTablet
 } from "react-device-detect";
-let isMobile:Boolean;
-if (process.env.NODE_ENV === "development") {
-  isMobile = window.innerWidth < 1024;
-} else {
-  isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
-}
+
+
+
+useEffect(() => {
+  let isMobile: boolean;
+  if (process.env.NODE_ENV === "development") {
+    isMobile = window.innerWidth < 1024;
+  } else {
+    isMobile = libIsMobile || libIsTablet || window.innerWidth < 1024;
+  }
+}, []);
+
 interface NavbarProps {
   window?: ()=>Window
 }
