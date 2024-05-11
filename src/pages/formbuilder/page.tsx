@@ -8,9 +8,9 @@ import {
 } from "../../redux/entities/formBuilderEntity";
 import useModalStrip from "../../global-hooks/useModalStrip";
 
-interface FormBuilderPageProps {}
+interface FormBuilderPageProps {window?: ()=>Window}
 
-const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = () => {
+const FormBuilderPage: FunctionComponent<FormBuilderPageProps> = (props) => {
   const template = useAppSelector(
     (state) => state.entities.formBuilder.selectedTemplate
   );
