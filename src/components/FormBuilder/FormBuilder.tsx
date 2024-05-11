@@ -30,6 +30,8 @@ useEffect(() => {
 }, []);
 
 
+let isMobile: boolean;
+isMobile = false;
 interface FormBuilderProps {
   template: TemplateType
 }
