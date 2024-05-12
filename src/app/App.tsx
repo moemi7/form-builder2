@@ -13,10 +13,7 @@ function App() {
 
   return (
     <>
-    <Provider store={store}><BackdropCircularProgressComponent /><ModalStrip />
-
-        <RouterProvider router={router} />
-        </Provider>
+    <Provider store={store}><BackdropCircularProgressComponent /><ModalStrip /><RouterProvider router={router} /></Provider>
   
     </>
   );

@@ -15,7 +15,7 @@ import ModalStrip from '../components/ModalStrip';
  
 //export const metadata: Metadata = {
  // title: 'React App',
-//  description: 'Web site created with Next.js.',
+ // description: 'Web site created with Next.js.',
 //}
 
  

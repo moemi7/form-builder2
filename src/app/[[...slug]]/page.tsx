@@ -2,6 +2,7 @@ import '../../index.css'
 import { ClientOnly } from './client'
 import type { Metadata } from 'next'
 
+
 export const metadata: Metadata = {
   title: 'React App',
   description: 'Web site created with Next.js.',
