@@ -1,5 +1,4 @@
 import React from 'react';
-import routes from '../utils/routes';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { store } from "../../redux/store";
 import { Provider } from 'react-redux'
