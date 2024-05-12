@@ -23,7 +23,7 @@ export const getAllTemplates = createAsyncThunk(
     thunkAPI.dispatch(openCircularProgress());
     return await new Promise<TemplateType[]>((resolve, reject) => {
       let outputInStorage = JSON.parse(getFromLocalStorage("templates"));
-      saveToDatabase("templates", JSON.stringify(outputInStorage));
+      //saveToDatabase("templates", JSON.stringify(outputInStorage));
       // Check if its null;
       if (outputInStorage === 0) {          //
         outputInStorage = DemoFormLayouts;
