@@ -7,6 +7,7 @@ const DemoFormLayouts: any = [
   {
     id: 'osama',                            //id: generateID(),
     formName: "Standaard form",
+    formID: 'osama',
     createdAt: currentDateTime,
     creator: "Oussama",
     formLayoutComponents: [
@@ -86,6 +87,7 @@ const DemoFormLayouts: any = [
   {
     id: generateID(),
     formName: "legale Document Form",
+    formID: 'nummereen',
     createdAt: currentDateTime,
     creator: "Test User",
     formLayoutComponents: [
