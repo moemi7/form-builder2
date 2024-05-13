@@ -14,6 +14,34 @@ interface AddTemplateType {
   formName: string;
   formID: string;
 }
+// logic to get all templateID's
+export const getAllTemplateIds = createAsyncThunk(
+  "formBuilderEntity/getAllTemplateIds",
+  async (_, thunkAPI) => {
+    thunkAPI.dispatch(openCircularProgress());
+
+    try {
+      let templates = JSON.parse(getFromLocalStorage("templates"));
+
+      // Check if templates are null or not an array
+      if (!templates || !Array.isArray(templates)) {
+        throw new Error("Templates not found or invalid format.");
+      }
+
+      // Extract and return template IDs
+      const templateIds = templates.map((template) => template.id);
+
+      // Close the Circular Progress
+      thunkAPI.dispatch(closeCircularProgress());
+
+      return templateIds;
+    } catch (error) {
+      thunkAPI.dispatch(closeCircularProgress());
+      throw error; // Rethrow the error to be caught by the caller
+    }
+  }
+);
+
 
 // Logic to Get All Templates
 export const getAllTemplates = createAsyncThunk(
@@ -42,6 +70,7 @@ export const getAllTemplates = createAsyncThunk(
     });
   }
 );
+
 
 // Logic to get Single Template
 export const getSingleTemplate = createAsyncThunk(
