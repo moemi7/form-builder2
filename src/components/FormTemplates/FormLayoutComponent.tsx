@@ -1,6 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { TemplateType } from "../../types/FormTemplateTypes";
 import { useNavigate } from "react-router-dom";
+import { useRouter } from 'next/router';
 import "./styles.scss";
 import { FormPublishStatus } from "../../utils/formBuilderUtils";
 import { IconButton } from "@mui/material";
@@ -32,6 +33,7 @@ const FormLayoutComponent: FunctionComponent<
 
 
   const navigate = useNavigate();
+  //const router = useRouter();
   const dispatch = useAppDispatch();
   const { template, createdFormLayout, setOpenDialog } = props;
 
